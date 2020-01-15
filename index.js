@@ -1,6 +1,5 @@
 const express = require("express")
-const sqlite3 = require("sqlite3")
-const sqliter = require("../sqliter")
+const sqliter = require("sqliter")
 
 let model = new sqliter.Model()
 
