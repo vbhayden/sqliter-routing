@@ -1,4 +1,4 @@
-const sqliter = require("../../sqliter/index");
+const sqliter = require("sqliter-models");
 const types = sqliter.types;
 
 class TestModel extends sqliter.Model
@@ -14,11 +14,6 @@ class TestModel extends sqliter.Model
 
         this.name = "test"
         this.define({
-            id: {
-                name: "id",
-                type: types.AUTO_ID,
-                description: "Auto-ID",
-            },
             test: {
                 name: "test",
                 type: types.TEXT,

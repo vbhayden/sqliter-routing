@@ -21,6 +21,6 @@
   },
   "dependencies": {
     "express": "^4.17.1",
-    "sqliter-models": "^0.0.1"
+    "sqliter-models": "^0.0.2"
   }
 }
