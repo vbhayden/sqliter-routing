@@ -91,7 +91,6 @@ module.exports = {
     /**
      * Middleware to interpret the request as a creation operation.
      * 
-     * @param {sqlite3.Database} db Database.
      * @param {sqliter.Model} model Model to query.
      * @returns {Function<express.Request, express.Response, express.NextFunction} Express Middleware
      */
@@ -131,7 +130,6 @@ module.exports = {
     /**
      * Middleware to process reading this model.
      * 
-     * @param {sqlite3.Database} db Database.
      * @param {sqliter.Model} model Model to query.
      * @returns {Function<express.Request, express.Response, express.NextFunction} Express Middleware
      */
@@ -169,7 +167,6 @@ module.exports = {
     /**
      * Middleware to process updating this model.
      * 
-     * @param {sqlite3.Database} db Database.
      * @param {sqliter.Model} model Model to query.
      * @returns {Function<express.Request, express.Response, express.NextFunction} Express Middleware
      */
@@ -219,7 +216,6 @@ module.exports = {
     /**
      * Middleware to enable deleting from model.
      * 
-     * @param {sqlite3.Database} db Database.
      * @param {sqliter.Model} model Model to query.
      * @returns {Function<express.Request, express.Response, express.NextFunction} Express Middleware
      */
