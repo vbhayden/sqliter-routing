@@ -1,6 +1,6 @@
 {
   "name": "sqliter-routing",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Routing config for Express apps with the sqlite-models library",
   "main": "index.js",
   "directories": {
@@ -21,6 +21,6 @@
   },
   "dependencies": {
     "express": "^4.17.1",
-    "sqliter-models": "^0.0.2"
+    "sqliter-models": "^0.0.3"
   }
 }
