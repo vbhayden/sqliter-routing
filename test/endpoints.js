@@ -1,6 +1,7 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 
+const uuidV4 = require("uuid/v4")
 const chai = require("chai");
 const chaiHttp = require("chai-http")
 const axios = require("axios").default
@@ -71,12 +72,14 @@ describe("CRUD Operations", () => {
     it("Should handle ORDER and LIMIT properly", async() => {
 
         let random = Math.random()
-        await axios.post(URL_CREATE, {int: 1325, test: "UPDATE ME", real: random})
+        await axios.post(URL_CREATE, {int: 9999, test: "UPDATE ME", real: random})
+        await axios.post(URL_CREATE, {int: 10000, test: "UPDATE ME", real: random})
 
-        let afterData = await axios.get(URL_READ + "?order=id desc&limit=1")
+        let response = await axios.get(URL_READ + `?real=${random}&order=id desc&limit=2`)
 
-        expect(afterData.data[0].real).to.equal(random)
-        expect(afterData.data.length).to.equal(1)
+        expect(response.data[0].int).to.equal(10000)
+        expect(response.data[1].int).to.equal(9999)
+        expect(response.data.length).to.equal(2)
     });
 
     it("Should allow UPDATE", async() => {
@@ -138,7 +141,7 @@ describe("CRUD Operations", () => {
         expect(checkRes.data.length).to.eql(0)
     })
 
-    it ("Should allow explicit query arguments", async() => {
+    it ("Should allow explicit query arguments [Real]", async() => {
         
         let random = Math.random()
 
@@ -150,5 +153,19 @@ describe("CRUD Operations", () => {
 
         expect(selectRes.data.length).to.equal(1);
         expect(selectRes.data[0].real).to.equal(random);
+    });
+
+    it ("Should allow explicit query arguments [UUID]", async() => {
+        
+        let uuid = uuidV4()
+
+        let createRes = await axios.post(URL_CREATE, {int: 1325, test: uuid, real: 2.717, date: new Date()})
+        console.log("CREATE:", createRes.data)
+
+        // Create a new entry
+        let selectRes = await axios.get(URL_READ + `?test=${uuid}&order=id desc&limit=1`)
+
+        expect(selectRes.data.length).to.equal(1);
+        expect(selectRes.data[0].test).to.equal(uuid);
     });
 });

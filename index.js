@@ -1,8 +1,6 @@
 const express = require("express")
 const sqliter = require("sqliter-models")
 
-let model = new sqliter.Model()
-
 function validQuery(model, payload, allowLimits = true, allowWhere = true) {
     let args = Object.keys(payload)
     for (let arg of args) {
@@ -115,7 +113,7 @@ module.exports = {
             let props = getProps(model, req.body)
             if (props.id !== undefined)
                 delete props.id
-            
+
             try {
                 let results = await model.insert(props)
                 res.json(results);
@@ -145,19 +143,21 @@ module.exports = {
             let explicitArgs = Object.keys(req.query).filter(arg => model.props[arg] != undefined)
             let explicitQuery = explicitArgs.map(arg => `${arg}=${req.query[arg]}`)
 
+            let limit = Number.parseInt(payload.limit)
+            let offset = Number.parseInt(payload.offset);
+
             let args = {
                 where: [...parseWhereClauses(payload.where), ...explicitQuery],
-                limit: payload.limit,
-                order: payload.order,
-                offset: payload.offset
+                limit: Number.isInteger(limit) ? limit : undefined,
+                offset: Number.isInteger(offset) ? offset : undefined,
+                order: payload.order
             }
-
+            
             try {
                 let results = await model.select("*", args)
                 res.json(results);
             }
             catch (error) {
-                console.log(error)
                 res.status(400).json(error)
             }
         }
