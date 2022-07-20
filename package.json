@@ -1,6 +1,6 @@
 {
   "name": "sqliter-routing",
-  "version": "0.0.4",
+  "version": "0.1.2",
   "description": "Routing config for Express apps with the sqlite-models library",
   "main": "index.js",
   "directories": {
@@ -12,7 +12,8 @@
   "author": "Trey Hayden",
   "license": "ISC",
   "devDependencies": {
-    "axios": "^0.19.0",
+    "axios": "^0.27.2",
+    "better-sqlite3": "^7.6.2",
     "body-parser": "^1.19.0",
     "chai": "^4.2.0",
     "chai-http": "^4.3.0",
@@ -22,6 +23,6 @@
   },
   "dependencies": {
     "express": "^4.17.1",
-    "sqliter-models": "^0.0.6"
+    "sqliter-models": "^0.1.2"
   }
 }

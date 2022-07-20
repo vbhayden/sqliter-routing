@@ -5,7 +5,7 @@ const uuidV4 = require("uuid/v4")
 const chai = require("chai");
 const chaiHttp = require("chai-http")
 const axios = require("axios").default
-const sqlite = require("sqlite3").verbose()
+const sqlite = require("better-sqlite3");
 
 const expect = chai.expect;
 
@@ -28,7 +28,10 @@ describe("CRUD Operations", () => {
 
     before(async() => {
         
-        db = new sqlite.Database(__dirname + "/test.db", sqlite.OPEN_READWRITE | sqlite.OPEN_CREATE, err => console.error(err));
+        db = sqlite(__dirname + "/test.db", {
+            fileMustExist: false,
+            readonly: false
+        });
 
         model = new TestModel();
         await model.init(db);
